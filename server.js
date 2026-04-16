@@ -13,21 +13,16 @@ app.use(express.json());
 // ================= DB CONNECTION =================
 connectDB();
 
-// ================= ROOT ROUTE =================
+// ================= ROOT ROUTE (OPEN SWAGGER) =================
 app.get("/", (req, res) => {
-  res.json({
-    message: "Task Backend is running 🚀",
-    status: "OK",
-    api: "/api",
-    docs: "/api-docs",
-  });
+  res.redirect("/api-docs");
 });
 
 // ================= ROUTES =================
 app.use("/api", require("./routes"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// ================= ERROR HANDLING (optional but recommended) =================
+// ================= 404 HANDLER =================
 app.use((req, res) => {
   res.status(404).json({
     success: false,
