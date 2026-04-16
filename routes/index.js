@@ -172,7 +172,7 @@ router.delete("/component/:id", common.delete(Component));
 router.post("/operation", common.create(Operation));
 
 /**
- * @swagger
+ * @swaggers
  * /api/operation:
  *   get:
  *     summary: Get all operations
