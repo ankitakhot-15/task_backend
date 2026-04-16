@@ -1,3 +1,5 @@
+require("dotenv").config(); // 🔥 MUST BE FIRST LINE
+
 const express = require("express");
 const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express");
@@ -8,8 +10,6 @@ const app = express();
 
 // ================= MIDDLEWARE =================
 app.use(express.json());
-
-// ✅ FIX: CORS for Swagger + frontend access
 app.use(cors());
 
 // ================= DB CONNECTION =================
@@ -22,6 +22,8 @@ app.use("/api", require("./routes"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // ================= SERVER =================
-app.listen(5000, "0.0.0.0", () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
