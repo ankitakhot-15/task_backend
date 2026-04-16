@@ -8,11 +8,9 @@ const options = {
     info: {
       title: "Manufacturing API",
       version: "1.0.0",
-      description:
-        "Machine, Component, Operation, Customer, Manufacturer & Location API",
+      description: "Machine, Component, Operation API",
     },
 
-    // ✅ FIXED HERE
     servers: [
       {
         url: process.env.BASE_URL || "http://localhost:5000",
@@ -25,7 +23,7 @@ const options = {
           type: "object",
           required: ["name"],
           properties: {
-            name: { type: "string", example: "ABC Industries" },
+            name: { type: "string" },
           },
         },
 
@@ -33,9 +31,9 @@ const options = {
           type: "object",
           required: ["name"],
           properties: {
-            name: { type: "string", example: "Pune Plant" },
-            latitude: { type: "number", example: 18.52 },
-            longitude: { type: "number", example: 73.85 },
+            name: { type: "string" },
+            latitude: { type: "number" },
+            longitude: { type: "number" },
           },
         },
 
@@ -49,60 +47,13 @@ const options = {
             "locationId",
           ],
           properties: {
-            machineName: { type: "string", example: "CNC Machine" },
-            serialNumber: { type: "string", example: "SN12345" },
-            manufacturerId: { type: "string", example: "64f1a..." },
-            model: { type: "string", example: "TX-100" },
-            year: { type: "number", example: 2024 },
-            type: { type: "number", example: 1 },
-            locationId: { type: "string", example: "64f1b..." },
-          },
-        },
-
-        Customer: {
-          type: "object",
-          required: ["name"],
-          properties: {
-            name: { type: "string", example: "John Doe" },
-          },
-        },
-
-        Component: {
-          type: "object",
-          required: ["customerId", "componentName", "partNo"],
-          properties: {
-            customerId: { type: "string" },
-            componentName: { type: "string" },
-            partNo: { type: "string" },
-            ecn: { type: "string" },
-          },
-        },
-
-        Operation: {
-          type: "object",
-          required: [
-            "componentId",
-            "machineId",
-            "operationCode",
-            "operationName",
-            "operationType",
-          ],
-          properties: {
-            componentId: { type: "string" },
-            machineId: { type: "string" },
-            operationCode: { type: "string" },
-            operationName: { type: "string" },
-            operationDescription: { type: "string" },
-            operationType: { type: "number" },
-          },
-        },
-
-        ApiResponse: {
-          type: "object",
-          properties: {
-            success: { type: "boolean" },
-            message: { type: "string" },
-            data: { type: "object" },
+            machineName: { type: "string" },
+            serialNumber: { type: "string" },
+            manufacturerId: { type: "string" },
+            model: { type: "string" },
+            year: { type: "number" },
+            type: { type: "number" },
+            locationId: { type: "string" },
           },
         },
       },
