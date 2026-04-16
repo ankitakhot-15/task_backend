@@ -5,17 +5,18 @@ const swaggerSpec = require("./config/swagger");
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 
-// DB Connection
+// DB
 connectDB();
 
 // Routes
 app.use("/api", require("./routes"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// ✅ FIX: bind to 0.0.0.0 so emulator/device can access
-app.listen(5000, "0.0.0.0", () => {
-  console.log("Server running on port 5000");
+// PORT FIX (IMPORTANT)
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
