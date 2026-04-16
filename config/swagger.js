@@ -12,15 +12,12 @@ const options = {
 
     servers: [
       {
-        url: process.env.BASE_URL || "http://localhost:5000/api",
+        url: process.env.BASE_URL || "http://localhost:5000",
       },
     ],
   },
 
-  // ✅ FIXED PATH (IMPORTANT)
   apis: [path.join(__dirname, "../routes/*.js")],
 };
 
-const specs = swaggerJsdoc(options);
-
-module.exports = specs;
+module.exports = swaggerJsdoc(options);
