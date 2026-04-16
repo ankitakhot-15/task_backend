@@ -17,6 +17,12 @@ const Operation = require("../models/componentOperation");
  * /api/manufacturer:
  *   post:
  *     summary: Create manufacturer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  */
 router.post("/manufacturer", common.create(Manufacturer));
 
@@ -33,6 +39,12 @@ router.get("/manufacturer", common.getAll(Manufacturer));
  * /api/manufacturer/{id}:
  *   get:
  *     summary: Get manufacturer by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get("/manufacturer/:id", common.getById(Manufacturer));
 
@@ -46,6 +58,12 @@ router.delete("/manufacturer/:id", common.delete(Manufacturer));
  * /api/location:
  *   post:
  *     summary: Create location
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  */
 router.post("/location", common.create(Location));
 
@@ -62,6 +80,12 @@ router.get("/location", common.getAll(Location));
  * /api/location/{id}:
  *   get:
  *     summary: Get location by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get("/location/:id", common.getById(Location));
 
@@ -75,6 +99,12 @@ router.delete("/location/:id", common.delete(Location));
  * /api/machine:
  *   post:
  *     summary: Create machine
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  */
 router.post("/machine", common.create(Machine));
 
@@ -83,6 +113,15 @@ router.post("/machine", common.create(Machine));
  * /api/machine:
  *   get:
  *     summary: Get all machines
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
  */
 router.get(
   "/machine",
@@ -94,6 +133,12 @@ router.get(
  * /api/machine/{id}:
  *   get:
  *     summary: Get machine by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get(
   "/machine/:id",
@@ -110,6 +155,12 @@ router.delete("/machine/:id", common.delete(Machine));
  * /api/customer:
  *   post:
  *     summary: Create customer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  */
 router.post("/customer", common.create(Customer));
 
@@ -126,6 +177,12 @@ router.get("/customer", common.getAll(Customer));
  * /api/customer/{id}:
  *   get:
  *     summary: Get customer by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get("/customer/:id", common.getById(Customer));
 
@@ -155,6 +212,12 @@ router.get("/component", common.getAll(Component, ["customerId"]));
  * /api/component/{id}:
  *   get:
  *     summary: Get component by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get("/component/:id", common.getById(Component, ["customerId"]));
 
@@ -172,7 +235,7 @@ router.delete("/component/:id", common.delete(Component));
 router.post("/operation", common.create(Operation));
 
 /**
- * @swaggers
+ * @swagger
  * /api/operation:
  *   get:
  *     summary: Get all operations
@@ -187,6 +250,12 @@ router.get(
  * /api/operation/{id}:
  *   get:
  *     summary: Get operation by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  */
 router.get(
   "/operation/:id",

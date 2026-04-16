@@ -1,4 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
+const path = require("path");
 
 const options = {
   definition: {
@@ -8,13 +9,16 @@ const options = {
       version: "1.0.0",
       description: "API for Machine & Component Management",
     },
+
     servers: [
       {
-        url: "http://localhost:5000/api",
+        url: process.env.BASE_URL || "http://localhost:5000/api",
       },
     ],
   },
-  apis: ["./routes/*.js"], // route files
+
+  // ✅ FIXED PATH (IMPORTANT)
+  apis: [path.join(__dirname, "../routes/*.js")],
 };
 
 const specs = swaggerJsdoc(options);
