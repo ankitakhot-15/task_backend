@@ -135,14 +135,6 @@ exports.update = (Model) => async (req, res) => {
       });
     }
 
-    // Empty body check
-    if (!req.body || Object.keys(req.body).length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Request body is empty",
-      });
-    }
-
     const data = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -160,15 +152,6 @@ exports.update = (Model) => async (req, res) => {
       data,
     });
   } catch (err) {
-    // Duplicate key error
-    if (err.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "Duplicate value not allowed",
-        field: Object.keys(err.keyValue),
-      });
-    }
-
     res.status(500).json({
       success: false,
       message: err.message,
@@ -178,6 +161,8 @@ exports.update = (Model) => async (req, res) => {
 //==delete api==================
 exports.delete = (Model) => async (req, res) => {
   try {
+    const mongoose = require("mongoose");
+
     // Validate ID
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({
