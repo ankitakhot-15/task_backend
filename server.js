@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express");
@@ -14,7 +16,6 @@ connectDB();
 app.use("/api", require("./routes"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// PORT FIX (IMPORTANT)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
