@@ -12,13 +12,13 @@ const options = {
         "Machine, Component, Operation, Customer, Manufacturer & Location API",
     },
 
+    // ✅ FIXED HERE
     servers: [
       {
-        url: process.env.BASE_URL || "http://localhost:5000/api",
+        url: process.env.BASE_URL || "http://localhost:5000",
       },
     ],
 
-    // ✅ IMPORTANT FIX (THIS WAS MISSING)
     components: {
       schemas: {
         Manufacturer: {
@@ -49,13 +49,13 @@ const options = {
             "locationId",
           ],
           properties: {
-            machineName: { type: "string" },
-            serialNumber: { type: "string" },
-            manufacturerId: { type: "string" },
-            model: { type: "string" },
-            year: { type: "number" },
-            type: { type: "number" },
-            locationId: { type: "string" },
+            machineName: { type: "string", example: "CNC Machine" },
+            serialNumber: { type: "string", example: "SN12345" },
+            manufacturerId: { type: "string", example: "64f1a..." },
+            model: { type: "string", example: "TX-100" },
+            year: { type: "number", example: 2024 },
+            type: { type: "number", example: 1 },
+            locationId: { type: "string", example: "64f1b..." },
           },
         },
 
