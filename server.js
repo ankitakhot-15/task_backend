@@ -1,19 +1,24 @@
-require("dotenv").config(); // 🔥 MUST BE FIRST LINE
+require("dotenv").config(); // MUST be first
 
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
-const cors = require("cors");
 
 const app = express();
 
 // ================= MIDDLEWARE =================
+app.use(cors()); // allow Swagger + frontend
 app.use(express.json());
-app.use(cors());
 
 // ================= DB CONNECTION =================
 connectDB();
+
+// ================= HEALTH CHECK (IMPORTANT FOR RENDER) =================
+app.get("/", (req, res) => {
+  res.send("API is running successfully 🚀");
+});
 
 // ================= ROUTES =================
 app.use("/api", require("./routes"));
