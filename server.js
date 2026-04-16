@@ -2,19 +2,26 @@ const express = require("express");
 const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
+const cors = require("cors");
 
 const app = express();
 
-// Middleware
+// ================= MIDDLEWARE =================
 app.use(express.json());
 
-// DB Connection
+// ✅ FIX: CORS for Swagger + frontend access
+app.use(cors());
+
+// ================= DB CONNECTION =================
 connectDB();
 
-// Routes
+// ================= ROUTES =================
 app.use("/api", require("./routes"));
 
-// ✅ FIX: bind to 0.0.0.0 so emulator/device can access
+// ================= SWAGGER =================
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// ================= SERVER =================
 app.listen(5000, "0.0.0.0", () => {
   console.log("Server running on port 5000");
 });
