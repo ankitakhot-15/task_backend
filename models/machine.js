@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Import enum map
-const { MachineTypeMap } = require("../enums");
+const { MachineTypeMap } = require("../utils/enums");
 // adjust path if needed
 
 const schema = new mongoose.Schema(
