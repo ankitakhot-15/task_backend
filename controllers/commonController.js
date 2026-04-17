@@ -196,9 +196,10 @@ const mongoose = require("mongoose");
 const { MachineTypeValue } = require("../utils/enums");
 
 // ================= CREATE =================
-
 exports.create = (Model) => async (req, res) => {
   try {
+    console.log("RAW BODY:", req.body);
+
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({
         success: false,
@@ -206,28 +207,34 @@ exports.create = (Model) => async (req, res) => {
       });
     }
 
-    // ✅ convert STRING → NUMBER
-    if (req.body.type) {
-      const value = MachineTypeValue[req.body.type];
+    const { MachineTypeValue } = require("../utils/enums");
 
-      if (!value) {
+    // 🔥 FORCE conversion FIRST (before anything else)
+    const typeKey = req.body.type;
+
+    if (typeKey) {
+      const converted = MachineTypeValue[typeKey];
+
+      console.log("CONVERTED TYPE:", converted);
+
+      if (!converted) {
         return res.status(400).json({
           success: false,
           message: "Invalid machine type",
         });
       }
 
-      req.body.type = value;
+      req.body.type = converted;
     }
 
     const data = await Model.create(req.body);
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       data,
     });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: err.message,
     });
