@@ -45,11 +45,10 @@ const schema = new mongoose.Schema(
   },
 );
 
-schema.set("toObject", {
+schema.set("toJSON", {
   transform: function (doc, ret) {
     ret.type = MachineTypeMap[ret.type] || "UNKNOWN";
     return ret;
   },
 });
-
 module.exports = mongoose.model("Machine", schema);

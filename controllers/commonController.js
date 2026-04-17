@@ -193,8 +193,10 @@
 // };
 
 const mongoose = require("mongoose");
+const { MachineTypeValue } = require("../utils/enums");
 
 // ================= CREATE =================
+
 exports.create = (Model) => async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -204,6 +206,20 @@ exports.create = (Model) => async (req, res) => {
       });
     }
 
+    // 🔥 convert string → number
+    if (req.body.type) {
+      const typeValue = MachineTypeValue[req.body.type];
+
+      if (!typeValue) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid machine type",
+        });
+      }
+
+      req.body.type = typeValue;
+    }
+
     const data = await Model.create(req.body);
 
     res.status(201).json({
@@ -211,28 +227,12 @@ exports.create = (Model) => async (req, res) => {
       data,
     });
   } catch (err) {
-    if (err.name === "ValidationError") {
-      return res.status(400).json({
-        success: false,
-        message: err.message,
-      });
-    }
-
-    if (err.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "Duplicate value not allowed",
-        field: Object.keys(err.keyValue),
-      });
-    }
-
     res.status(500).json({
       success: false,
       message: err.message,
     });
   }
 };
-
 // ================= GET ALL =================
 exports.getAll =
   (Model, populate = []) =>

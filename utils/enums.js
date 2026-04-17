@@ -1,4 +1,3 @@
-
 const MachineType = {
   CNC_TURNING_CENTER: 1,
   VMC: 2,
@@ -8,31 +7,18 @@ const MachineType = {
   FIVE_AXIS: 6,
 };
 
-const OperationType = {
-  TURNING: 1,
-  MILLING: 2,
-  DRILLING: 3,
-  CHAMFERING: 4,
-  TAPPING: 5,
-  THREADING: 6,
-  BORING: 7,
-  KNURLING: 8,
-  HONING: 9,
-  BUFFING: 10,
-};
-
-// reverse maps (number → string)
-const MachineTypeMap = Object.fromEntries(
-  Object.entries(MachineType).map(([key, value]) => [value, key]),
+// string → number (for create)
+const MachineTypeValue = Object.fromEntries(
+  Object.entries(MachineType).map(([key, value]) => [key, value])
 );
 
-const OperationTypeMap = Object.fromEntries(
-  Object.entries(OperationType).map(([key, value]) => [value, key]),
+// number → string (for response)
+const MachineTypeMap = Object.fromEntries(
+  Object.entries(MachineType).map(([key, value]) => [value, key])
 );
 
 module.exports = {
   MachineType,
-  OperationType,
   MachineTypeMap,
-  OperationTypeMap,
+  MachineTypeValue,
 };
