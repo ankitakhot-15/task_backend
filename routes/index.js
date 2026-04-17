@@ -76,12 +76,12 @@
 // router.put("/operation/:id", common.update(Operation));
 // router.delete("/operation/:id", common.delete(Operation));
 // module.exports = router;
+
 const express = require("express");
 const router = express.Router();
 
 const common = require("../controllers/commonController");
 
-// Models
 const Machine = require("../models/machine");
 const Manufacturer = require("../models/machinemanufacture");
 const Location = require("../models/location");
@@ -97,12 +97,6 @@ const Operation = require("../models/componentOperation");
  *   post:
  *     summary: Create Manufacturer
  *     tags: [Manufacturer]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Manufacturer'
  */
 router.post("/manufacturer", common.create(Manufacturer));
 
@@ -121,12 +115,6 @@ router.get("/manufacturer", common.getAll(Manufacturer));
  *   get:
  *     summary: Get Manufacturer by ID
  *     tags: [Manufacturer]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *     schema:
- *       type: string
  */
 router.get("/manufacturer/:id", common.getById(Manufacturer));
 

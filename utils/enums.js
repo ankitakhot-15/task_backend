@@ -1,3 +1,4 @@
+
 const MachineType = {
   CNC_TURNING_CENTER: 1,
   VMC: 2,
@@ -20,6 +21,7 @@ const OperationType = {
   BUFFING: 10,
 };
 
+// reverse maps (number → string)
 const MachineTypeMap = Object.fromEntries(
   Object.entries(MachineType).map(([key, value]) => [value, key]),
 );
