@@ -79,6 +79,7 @@
 
 const express = require("express");
 const router = express.Router();
+const { convertMachineType } = require("../middleware/machineMiddleware");
 
 const common = require("../controllers/commonController");
 
@@ -154,7 +155,7 @@ router.delete("/location/:id", common.delete(Location));
  *     summary: Create Machine
  *     tags: [Machine]
  */
-router.post("/machine", common.create(Machine));
+router.post("/machine", convertMachineType, common.create(Machine));
 
 /**
  * @swagger
@@ -168,14 +169,37 @@ router.get(
   common.getAll(Machine, ["manufacturerId", "locationId"]),
 );
 
+/**
+ * @swagger
+ * /api/machine/{id}:
+ *   get:
+ *     summary: Get Machine by ID
+ *     tags: [Machine]
+ */
 router.get(
   "/machine/:id",
   common.getById(Machine, ["manufacturerId", "locationId"]),
 );
 
+/**
+ * @swagger
+ * /api/machine/{id}:
+ *   put:
+ *     summary: Update Machine
+ *     tags: [Machine]
+ */
 router.put("/machine/:id", common.update(Machine));
+
+/**
+ * @swagger
+ * /api/machine/{id}:
+ *   delete:
+ *     summary: Delete Machine
+ *     tags: [Machine]
+ */
 router.delete("/machine/:id", common.delete(Machine));
 
+module.exports = router;
 // ================= CUSTOMER =================
 
 /**
