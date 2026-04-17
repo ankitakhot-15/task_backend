@@ -191,6 +191,7 @@
 //     });
 //   }
 // };
+
 const mongoose = require("mongoose");
 
 // ================= CREATE =================
@@ -247,13 +248,17 @@ exports.getAll =
         .skip((page - 1) * limit)
         .limit(limit);
 
-      // cleaner populate
       if (populate.length) {
         query = query.populate(populate);
       }
 
-      const data = await query;
+      const docs = await query;
       const total = await Model.countDocuments();
+
+      const data = docs.map((doc) => {
+        const obj = doc.toObject(); // 🔥 IMPORTANT
+        return obj;
+      });
 
       res.status(200).json({
         success: true,
@@ -269,7 +274,6 @@ exports.getAll =
       });
     }
   };
-
 // ================= GET BY ID =================
 exports.getById =
   (Model, populate = []) =>
@@ -288,14 +292,16 @@ exports.getById =
         query = query.populate(populate);
       }
 
-      const data = await query;
+      const doc = await query;
 
-      if (!data) {
+      if (!doc) {
         return res.status(404).json({
           success: false,
           message: "Data not found",
         });
       }
+
+      const data = doc.toObject(); // 🔥 IMPORTANT
 
       res.status(200).json({
         success: true,

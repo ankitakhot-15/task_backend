@@ -45,9 +45,9 @@ const schema = new mongoose.Schema(
   },
 );
 
-schema.set("toJSON", {
+schema.set("toObject", {
   transform: function (doc, ret) {
-    ret.type = MachineTypeMap[ret.type] || "UNKNOWN"; // 👈 replace number
+    ret.type = MachineTypeMap[ret.type] || "UNKNOWN";
     return ret;
   },
 });
