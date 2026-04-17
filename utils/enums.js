@@ -7,18 +7,18 @@ const MachineType = {
   FIVE_AXIS: 6,
 };
 
-// string → number (for create)
+// string → number
 const MachineTypeValue = Object.fromEntries(
-  Object.entries(MachineType).map(([key, value]) => [key, value])
+  Object.entries(MachineType).map(([k, v]) => [k, v])
 );
 
-// number → string (for response)
+// number → string
 const MachineTypeMap = Object.fromEntries(
-  Object.entries(MachineType).map(([key, value]) => [value, key])
+  Object.entries(MachineType).map(([k, v]) => [v, k])
 );
 
 module.exports = {
   MachineType,
-  MachineTypeMap,
   MachineTypeValue,
+  MachineTypeMap,
 };

@@ -1,7 +1,7 @@
 const { MachineTypeValue } = require("../utils/enums");
 
 exports.convertMachineType = (req, res, next) => {
-  if (req.body?.type) {
+  if (req.body && req.body.type !== undefined) {
     const value = MachineTypeValue[req.body.type];
 
     if (!value) {
