@@ -7,12 +7,10 @@ const MachineType = {
   FIVE_AXIS: 6,
 };
 
-// string → number
 const MachineTypeValue = Object.fromEntries(
   Object.entries(MachineType).map(([k, v]) => [k, v])
 );
 
-// number → string
 const MachineTypeMap = Object.fromEntries(
   Object.entries(MachineType).map(([k, v]) => [v, k])
 );

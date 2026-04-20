@@ -9,7 +9,7 @@ const swaggerSpec = require("./config/swagger");
 const app = express();
 
 // ================= MIDDLEWARE =================
-app.use(cors()); // allow Swagger + frontend
+app.use(cors()); 
 app.use(express.json());
 
 // ================= DB CONNECTION =================
@@ -17,7 +17,7 @@ connectDB();
 
 // ================= HEALTH CHECK (IMPORTANT FOR RENDER) =================
 app.get("/", (req, res) => {
-  res.send("API is running successfully 🚀");
+  res.send("API is running successfully ");
 });
 
 // ================= ROUTES =================

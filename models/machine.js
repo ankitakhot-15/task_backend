@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
-
-// Import enum map
 const { MachineTypeMap } = require("../utils/enums");
-// adjust path if needed
-
 const schema = new mongoose.Schema(
   {
     machineName: { type: String, required: true },
@@ -30,7 +26,7 @@ const schema = new mongoose.Schema(
 
     type: {
       type: Number,
-      enum: [1, 2, 3, 4, 5, 6], // DB validation
+      enum: [1, 2, 3, 4, 5, 6], 
       required: true,
     },
 
